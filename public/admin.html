@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex">
+  <title>Administración – Brote</title>
+  <link rel="stylesheet" href="/css/estilos.css">
+</head>
+<body>
+<main class="contenedor admin">
+  <h1>Pedidos de Brote</h1>
+
+  <form id="f-clave" class="admin-clave">
+    <input type="password" id="clave" placeholder="Clave de administrador" aria-label="Clave de administrador" required>
+    <button class="btn" type="submit">Entrar</button>
+  </form>
+
+  <div id="msg" role="status"></div>
+
+  <div class="tabla">
+    <table id="tabla" hidden>
+      <thead>
+        <tr>
+          <th>Folio</th><th>Cliente</th><th>Correo</th><th>Envío</th>
+          <th>Kits</th><th>Total</th><th>Pago</th><th>Estado</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+  </div>
+</main>
+
+<script src="/js/admin.js"></script>
+</body>
+</html>

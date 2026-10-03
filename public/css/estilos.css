@@ -1,0 +1,508 @@
+/* ==========================================================================
+   Brote – Hoja de estilos
+   Índice:
+     1. Variables (colores, medidas)
+     2. Base y tipografía
+     3. Estructura general
+     4. Encabezado y menú
+     5. Portada (hero)
+     6. Componentes (botones, tarjetas, pasos)
+     7. Multimedia (video y galería)
+     8. Formularios y mensajes
+     9. Pie de página
+    10. Panel de administración
+    11. Diseño responsivo (tableta y celular)
+   ========================================================================== */
+
+
+/* 1. VARIABLES ------------------------------------------------------------ */
+:root {
+  /* Paleta principal */
+  --verde: #2f7d4f;
+  --oscuro: #173d2a;
+  --acento: #f2a541;
+
+  /* Fondos y textos */
+  --crema: #fbf7ee;
+  --crema-oscuro: #f1ecdf;
+  --blanco: #ffffff;
+  --texto: #26332b;
+  --texto-suave: #4b5b52;
+  --tinta: #222222;
+
+  /* Tonos verdes claros (menú y pie) */
+  --menta: #e7f3ea;
+  --menta-oscuro: #cfe3d6;
+
+  /* Bordes */
+  --borde: #cfd8d2;
+  --borde-suave: #e3e8e5;
+
+  /* Mensajes */
+  --ok-fondo: #e3f5e8;
+  --ok-texto: #14532d;
+  --error-fondo: #fde8e8;
+  --error-texto: #7f1d1d;
+
+  /* Medidas */
+  --radio: 16px;
+  --radio-chico: 10px;
+  --sombra: 0 4px 14px rgb(0 0 0 / 0.07);
+  --ancho-max: 1100px;
+}
+
+
+/* 2. BASE Y TIPOGRAFÍA ---------------------------------------------------- */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+* {
+  margin: 0;
+}
+
+[hidden] {
+  display: none !important;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 70px; /* evita que el menú fijo tape los títulos */
+}
+
+body {
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  font-size: 1rem;
+  line-height: 1.6;
+  color: var(--texto);
+  background: var(--crema);
+}
+
+img,
+svg,
+video {
+  max-width: 100%;
+}
+
+p {
+  margin: 0.6rem 0;
+}
+
+/* Líneas de texto de longitud cómoda para leer */
+section p {
+  max-width: 70ch;
+}
+
+h1 {
+  font-size: clamp(2rem, 5vw, 3.2rem);
+  line-height: 1.15;
+}
+
+h2 {
+  font-size: 1.9rem;
+  line-height: 1.25;
+  color: var(--oscuro);
+  margin-bottom: 1rem;
+}
+
+h3 {
+  font-size: 1.15rem;
+  line-height: 1.3;
+  margin-bottom: 0.3rem;
+}
+
+/* Foco visible para quien navega con teclado */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+  outline: 3px solid var(--acento);
+  outline-offset: 3px;
+}
+
+/* Enlace para saltar el menú (accesibilidad) */
+.saltar {
+  position: absolute;
+  left: -999px;
+  top: 0.5rem;
+  z-index: 20;
+  padding: 0.5rem 1rem;
+  border-radius: var(--radio-chico);
+  background: var(--blanco);
+  color: var(--oscuro);
+}
+
+.saltar:focus {
+  left: 1rem;
+}
+
+
+/* 3. ESTRUCTURA GENERAL --------------------------------------------------- */
+.contenedor {
+  width: min(var(--ancho-max), 92%);
+  margin: auto;
+}
+
+.angosto {
+  width: min(620px, 92%);
+}
+
+section {
+  padding: 3.5rem 0;
+}
+
+section.claro {
+  background: var(--crema-oscuro);
+}
+
+/* Dos columnas (se apilan en celular) */
+.dos {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  align-items: center;
+}
+
+
+/* 4. ENCABEZADO Y MENÚ ---------------------------------------------------- */
+header {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  background: var(--oscuro);
+}
+
+.barra {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.8rem 0;
+}
+
+.logo {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--blanco);
+  font-size: 1.3rem;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.logo-icono {
+  width: 34px;
+  height: 34px;
+}
+
+#nav ul {
+  display: flex;
+  gap: 1.2rem;
+  padding: 0;
+  list-style: none;
+}
+
+#nav a {
+  color: var(--menta);
+  text-decoration: none;
+}
+
+#nav a:hover {
+  color: var(--acento);
+}
+
+/* Botón del menú: solo se ve en tableta y celular */
+#menu {
+  display: none;
+  background: none;
+  border: 0;
+  color: var(--blanco);
+  font-size: 1.7rem;
+  cursor: pointer;
+}
+
+
+/* 5. PORTADA (HERO) ------------------------------------------------------- */
+.hero {
+  padding: 4rem 0;
+  color: var(--blanco);
+  background: linear-gradient(135deg, var(--oscuro), var(--verde));
+}
+
+.hero .contenedor {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: 2rem;
+  align-items: center;
+}
+
+
+/* 6. COMPONENTES ---------------------------------------------------------- */
+.btn {
+  display: inline-block;
+  padding: 0.8rem 1.6rem;
+  border: 0;
+  border-radius: 999px;
+  background: var(--acento);
+  color: var(--tinta);
+  font: inherit;
+  font-weight: 700;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.btn:hover {
+  filter: brightness(1.08);
+}
+
+.tarjetas {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem;
+}
+
+.tarjeta {
+  padding: 1.2rem;
+  border-radius: var(--radio);
+  background: var(--blanco);
+  box-shadow: var(--sombra);
+}
+
+.numero {
+  display: inline-grid;
+  place-items: center;
+  width: 2.2rem;
+  height: 2.2rem;
+  margin-bottom: 0.5rem;
+  border-radius: 50%;
+  background: var(--verde);
+  color: var(--blanco);
+  font-weight: 700;
+}
+
+.precio {
+  margin-top: 1rem;
+  font-size: 1.15rem;
+}
+
+
+/* 7. MULTIMEDIA ----------------------------------------------------------- */
+.video {
+  display: block;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  border-radius: var(--radio);
+  background: #000;
+}
+
+.leyenda {
+  margin-top: 0.6rem;
+  font-size: 0.92rem;
+  color: var(--texto-suave);
+}
+
+/* Galería: 3 columnas en escritorio, 2 en tableta, 1 en celular */
+.galeria {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1rem;
+}
+
+.foto {
+  overflow: hidden;
+  border-radius: var(--radio);
+  background: var(--blanco);
+  box-shadow: var(--sombra);
+}
+
+.foto img {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+}
+
+.foto figcaption {
+  padding: 0.9rem 1rem 1rem;
+}
+
+.foto strong {
+  display: block;
+  color: var(--oscuro);
+}
+
+.foto span {
+  display: block;
+  font-size: 0.92rem;
+  color: var(--texto-suave);
+}
+
+
+/* 8. FORMULARIOS Y MENSAJES ----------------------------------------------- */
+form {
+  display: grid;
+  gap: 0.9rem;
+  padding: 1.5rem;
+  border-radius: var(--radio);
+  background: var(--blanco);
+  box-shadow: var(--sombra);
+}
+
+label {
+  display: grid;
+  gap: 0.3rem;
+  font-size: 0.92rem;
+  font-weight: 600;
+}
+
+input,
+select,
+textarea {
+  width: 100%;
+  padding: 0.7rem;
+  border: 1px solid var(--borde);
+  border-radius: var(--radio-chico);
+  font: inherit;
+}
+
+.ok,
+.error {
+  padding: 0.8rem 1rem;
+  border-radius: var(--radio-chico);
+}
+
+.ok {
+  background: var(--ok-fondo);
+  color: var(--ok-texto);
+}
+
+.error {
+  background: var(--error-fondo);
+  color: var(--error-texto);
+}
+
+
+/* 9. PIE DE PÁGINA -------------------------------------------------------- */
+footer {
+  padding: 2rem 0;
+  background: var(--oscuro);
+  color: var(--menta-oscuro);
+  text-align: center;
+}
+
+footer p {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.redes {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1.2rem;
+}
+
+.redes a {
+  color: var(--blanco);
+}
+
+
+/* 10. PANEL DE ADMINISTRACIÓN --------------------------------------------- */
+.admin {
+  padding: 2rem 0;
+}
+
+.admin h1 {
+  color: var(--oscuro);
+}
+
+.admin-clave {
+  grid-template-columns: 1fr auto;
+  margin: 1rem 0;
+}
+
+.tabla {
+  overflow-x: auto;
+}
+
+table {
+  width: 100%;
+  min-width: 720px;
+  border-collapse: collapse;
+  background: var(--blanco);
+}
+
+th,
+td {
+  padding: 0.6rem;
+  border-bottom: 1px solid var(--borde-suave);
+  font-size: 0.9rem;
+  text-align: left;
+}
+
+
+/* 11. DISEÑO RESPONSIVO ---------------------------------------------------- */
+
+/* Tableta y pantallas medianas: el menú pasa a botón hamburguesa */
+@media (max-width: 900px) {
+  #menu {
+    display: block;
+  }
+
+  #nav {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    padding: 1rem 4%;
+    background: var(--oscuro);
+  }
+
+  #nav.abierto {
+    display: block;
+  }
+
+  #nav ul {
+    flex-direction: column;
+  }
+}
+
+/* Celular: las columnas se apilan */
+@media (max-width: 700px) {
+  .hero .contenedor,
+  .dos {
+    grid-template-columns: 1fr;
+  }
+
+  .hero svg {
+    max-width: 240px;
+    margin: auto;
+  }
+}
+
+/* Celulares pequeños: espacios y títulos más compactos */
+@media (max-width: 480px) {
+  section {
+    padding: 2.5rem 0;
+  }
+
+  .hero {
+    padding: 2.5rem 0;
+  }
+
+  h2 {
+    font-size: 1.6rem;
+  }
+
+  form {
+    padding: 1rem;
+  }
+
+  .admin-clave {
+    grid-template-columns: 1fr;
+  }
+}
